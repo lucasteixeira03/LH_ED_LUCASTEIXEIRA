@@ -9,7 +9,7 @@ DB_NAME = "banvic"
 DB_USER = "data_engineer"
 DB_PASS = "v3rysecur&pas5w0rd"
 
-def extracao_tabela(nome_tabela: str):
+def extracao_tabela(nome_tabela: str):  # criando conexão com o banco
     conn = psycopg2.connect(
         host = DB_HOST,
         port = DB_PORT,
@@ -22,7 +22,7 @@ def extracao_tabela(nome_tabela: str):
     df = pd.read_sql(query, conn)
     conn.close()
 
-    today = datetime.today().strftime("%Y-%m-%d")
+    today = datetime.today().strftime("%Y-%m-%d") # pasta no formato exigido
     output_dir = os.path.join(today, "postgres")
     os.makedirs(output_dir, exist_ok=True)
 
