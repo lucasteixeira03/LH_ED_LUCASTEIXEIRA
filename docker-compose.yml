@@ -10,3 +10,14 @@ services:
       - ./banvic.sql:/docker-entrypoint-initdb.d/banvic.sql
     ports:
       - 55432:5432
+
+  dw:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: banvic_warehouse
+      POSTGRES_USER: lucas_dw
+      POSTGRES_PASSWORD: dr0w5sap&rucesyr3v
+    volumes:
+      - ./dwdata:/var/lib/postgresql/data
+    ports:
+      - 56432:5432
