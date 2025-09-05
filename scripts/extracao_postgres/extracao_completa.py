@@ -3,7 +3,7 @@ import psycopg2
 import pandas as pd
 from datetime import datetime
 
-DB_HOST = "localhost"
+DB_HOST = "host.docker.internal"
 DB_PORT = "55432"
 DB_NAME = "banvic"
 DB_USER = "data_engineer"
@@ -38,7 +38,7 @@ for tabela in tabelas:
 
     df = pd.read_sql(f'select * from "{tabela}";', conn)
     caminho_csv = os.path.join(pasta_saida, f"{tabela}.csv")
-    df.to_csv(caminho_csv, index=False, encoding="utf-8")
+    df.to_csv(caminho_csv, index=False, encoding="utf-8-sig")
 
     cur.execute(f'select COUNT(*) from "{tabela}";')
     qtd_db = cur.fetchone()[0]

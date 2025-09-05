@@ -16,7 +16,7 @@ def main():
     os.makedirs(pasta_saida, exist_ok=True)
 
     destino = os.path.join(pasta_saida, "transacoes.csv")
-    df.to_csv(destino, index=False, encoding="utf-8")
+    df.to_csv(destino, index=False, encoding="utf-8-sig")
 
     linhas = len(df)
     colunas = list(df.columns)

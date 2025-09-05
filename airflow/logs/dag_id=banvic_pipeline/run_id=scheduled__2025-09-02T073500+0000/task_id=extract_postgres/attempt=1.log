@@ -1,0 +1,148 @@
+[2025-09-03T23:50:16.678+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-03T23:50:16.785+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: banvic_pipeline.extract_postgres scheduled__2025-09-02T07:35:00+00:00 [queued]>
+[2025-09-03T23:50:16.800+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: banvic_pipeline.extract_postgres scheduled__2025-09-02T07:35:00+00:00 [queued]>
+[2025-09-03T23:50:16.801+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-09-03T23:50:16.839+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): extract_postgres> on 2025-09-02 07:35:00+00:00
+[2025-09-03T23:50:16.851+0000] {standard_task_runner.py:64} INFO - Started process 182 to run task
+[2025-09-03T23:50:16.862+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'banvic_pipeline', 'extract_postgres', 'scheduled__2025-09-02T07:35:00+00:00', '--job-id', '34', '--raw', '--subdir', 'DAGS_FOLDER/banvic_pipeline.py', '--cfg-path', '/tmp/tmpa3zh2mso']
+[2025-09-03T23:50:16.865+0000] {standard_task_runner.py:91} INFO - Job 34: Subtask extract_postgres
+[2025-09-03T23:50:17.179+0000] {task_command.py:426} INFO - Running <TaskInstance: banvic_pipeline.extract_postgres scheduled__2025-09-02T07:35:00+00:00 [running]> on host 644a78dce44d
+[2025-09-03T23:50:17.609+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='lucas' AIRFLOW_CTX_DAG_ID='banvic_pipeline' AIRFLOW_CTX_TASK_ID='extract_postgres' AIRFLOW_CTX_EXECUTION_DATE='2025-09-02T07:35:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-02T07:35:00+00:00'
+[2025-09-03T23:50:17.610+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-03T23:50:17.655+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-09-03T23:50:17.657+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python /opt/airflow/project/scripts/extracao_postgres/extracao_completa.py']
+[2025-09-03T23:50:17.674+0000] {subprocess.py:86} INFO - Output:
+[2025-09-03T23:50:20.082+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2025-09-03T23:50:20.084+0000] {subprocess.py:93} INFO -   File "/opt/airflow/project/scripts/extracao_postgres/extracao_completa.py", line 12, in <module>
+[2025-09-03T23:50:20.086+0000] {subprocess.py:93} INFO -     conn = psycopg2.connect(
+[2025-09-03T23:50:20.087+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+[2025-09-03T23:50:20.087+0000] {subprocess.py:93} INFO -     conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+[2025-09-03T23:50:20.088+0000] {subprocess.py:93} INFO - psycopg2.OperationalError: connection to server at "localhost" (::1), port 55432 failed: Connection refused
+[2025-09-03T23:50:20.088+0000] {subprocess.py:93} INFO - 	Is the server running on that host and accepting TCP/IP connections?
+[2025-09-03T23:50:20.089+0000] {subprocess.py:93} INFO - connection to server at "localhost" (127.0.0.1), port 55432 failed: Connection refused
+[2025-09-03T23:50:20.089+0000] {subprocess.py:93} INFO - 	Is the server running on that host and accepting TCP/IP connections?
+[2025-09-03T23:50:20.089+0000] {subprocess.py:93} INFO - 
+[2025-09-03T23:50:20.227+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-09-03T23:50:20.229+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-03T23:50:20.278+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/bash.py", line 243, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-09-03T23:50:20.284+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=banvic_pipeline, task_id=extract_postgres, run_id=scheduled__2025-09-02T07:35:00+00:00, execution_date=20250902T073500, start_date=20250903T235016, end_date=20250903T235020
+[2025-09-03T23:50:20.352+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 34 for task extract_postgres (Bash command failed. The command returned a non-zero exit code 1.; 182)
+[2025-09-03T23:50:20.387+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2025-09-03T23:50:20.555+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-03T23:50:20.561+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-09-04T00:24:30.669+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-04T00:24:30.813+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: banvic_pipeline.extract_postgres scheduled__2025-09-02T07:35:00+00:00 [queued]>
+[2025-09-04T00:24:30.831+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: banvic_pipeline.extract_postgres scheduled__2025-09-02T07:35:00+00:00 [queued]>
+[2025-09-04T00:24:30.833+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-09-04T00:24:30.868+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): extract_postgres> on 2025-09-02 07:35:00+00:00
+[2025-09-04T00:24:30.878+0000] {standard_task_runner.py:64} INFO - Started process 646 to run task
+[2025-09-04T00:24:30.887+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'banvic_pipeline', 'extract_postgres', 'scheduled__2025-09-02T07:35:00+00:00', '--job-id', '42', '--raw', '--subdir', 'DAGS_FOLDER/banvic_pipeline.py', '--cfg-path', '/tmp/tmpmq9tab6k']
+[2025-09-04T00:24:30.890+0000] {standard_task_runner.py:91} INFO - Job 42: Subtask extract_postgres
+[2025-09-04T00:24:31.105+0000] {task_command.py:426} INFO - Running <TaskInstance: banvic_pipeline.extract_postgres scheduled__2025-09-02T07:35:00+00:00 [running]> on host 644a78dce44d
+[2025-09-04T00:24:31.381+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='lucas' AIRFLOW_CTX_DAG_ID='banvic_pipeline' AIRFLOW_CTX_TASK_ID='extract_postgres' AIRFLOW_CTX_EXECUTION_DATE='2025-09-02T07:35:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-02T07:35:00+00:00'
+[2025-09-04T00:24:31.384+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-04T00:24:31.415+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-09-04T00:24:31.422+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'cd /opt/airflow/project && python scripts/extracao_postgres/extracao_completa.py']
+[2025-09-04T00:24:31.506+0000] {subprocess.py:86} INFO - Output:
+[2025-09-04T00:24:34.188+0000] {subprocess.py:93} INFO - /opt/airflow/project/scripts/extracao_postgres/extracao_completa.py:39: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2025-09-04T00:24:34.190+0000] {subprocess.py:93} INFO -   df = pd.read_sql(f'select * from "{tabela}";', conn)
+[2025-09-04T00:24:34.386+0000] {subprocess.py:93} INFO - /opt/airflow/project/scripts/extracao_postgres/extracao_completa.py:39: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2025-09-04T00:24:34.387+0000] {subprocess.py:93} INFO -   df = pd.read_sql(f'select * from "{tabela}";', conn)
+[2025-09-04T00:24:34.575+0000] {subprocess.py:93} INFO - /opt/airflow/project/scripts/extracao_postgres/extracao_completa.py:39: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2025-09-04T00:24:34.577+0000] {subprocess.py:93} INFO -   df = pd.read_sql(f'select * from "{tabela}";', conn)
+[2025-09-04T00:24:34.697+0000] {subprocess.py:93} INFO - Tabelas encontradas: ['agencias', 'clientes', 'colaborador_agencia', 'colaboradores', 'contas', 'propostas_credito']
+[2025-09-04T00:24:34.701+0000] {subprocess.py:93} INFO - 
+[2025-09-04T00:24:34.703+0000] {subprocess.py:93} INFO - Extraindo: agencias
+[2025-09-04T00:24:34.705+0000] {subprocess.py:93} INFO - Linhas DB: 10 | Linhas CSV: 10 -> OK
+[2025-09-04T00:24:34.706+0000] {subprocess.py:93} INFO - Arquivo salvo: 2025-09-04/postgres/agencias.csv
+[2025-09-04T00:24:34.707+0000] {subprocess.py:93} INFO - 
+[2025-09-04T00:24:34.708+0000] {subprocess.py:93} INFO - Extraindo: clientes
+[2025-09-04T00:24:34.708+0000] {subprocess.py:93} INFO - Linhas DB: 998 | Linhas CSV: 998 -> OK
+[2025-09-04T00:24:34.709+0000] {subprocess.py:93} INFO - Arquivo salvo: 2025-09-04/postgres/clientes.csv
+[2025-09-04T00:24:34.710+0000] {subprocess.py:93} INFO - 
+[2025-09-04T00:24:34.711+0000] {subprocess.py:93} INFO - Extraindo: colaborador_agencia
+[2025-09-04T00:24:34.713+0000] {subprocess.py:93} INFO - Linhas DB: 100 | Linhas CSV: 100 -> OK
+[2025-09-04T00:24:34.718+0000] {subprocess.py:93} INFO - Arquivo salvo: 2025-09-04/postgres/colaborador_agencia.csv
+[2025-09-04T00:24:34.720+0000] {subprocess.py:93} INFO - 
+[2025-09-04T00:24:34.721+0000] {subprocess.py:93} INFO - Extraindo: colaboradores
+[2025-09-04T00:24:34.722+0000] {subprocess.py:93} INFO - Linhas DB: 100 | Linhas CSV: 100 -> OK
+[2025-09-04T00:24:34.724+0000] {subprocess.py:93} INFO - Arquivo salvo: 2025-09-04/postgres/colaboradores.csv
+[2025-09-04T00:24:34.725+0000] {subprocess.py:93} INFO - 
+[2025-09-04T00:24:34.726+0000] {subprocess.py:93} INFO - Extraindo: contas
+[2025-09-04T00:24:34.727+0000] {subprocess.py:93} INFO - Linhas DB: 998 | Linhas CSV: 998 -> OK
+[2025-09-04T00:24:34.729+0000] {subprocess.py:93} INFO - Arquivo salvo: 2025-09-04/postgres/contas.csv
+[2025-09-04T00:24:34.730+0000] {subprocess.py:93} INFO - 
+[2025-09-04T00:24:34.731+0000] {subprocess.py:93} INFO - Extraindo: propostas_credito
+[2025-09-04T00:24:34.732+0000] {subprocess.py:93} INFO - Linhas DB: 1995 | Linhas CSV: 1995 -> OK
+[2025-09-04T00:24:34.734+0000] {subprocess.py:93} INFO - Arquivo salvo: 2025-09-04/postgres/propostas_credito.csv
+[2025-09-04T00:24:34.735+0000] {subprocess.py:93} INFO - 
+[2025-09-04T00:24:34.737+0000] {subprocess.py:93} INFO - Finalizado! Todos os CSVs foram gerados na pasta: 2025-09-04/postgres
+[2025-09-04T00:24:34.856+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-09-04T00:24:34.858+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-04T00:24:35.124+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=banvic_pipeline, task_id=extract_postgres, run_id=scheduled__2025-09-02T07:35:00+00:00, execution_date=20250902T073500, start_date=20250904T002430, end_date=20250904T002435
+[2025-09-04T00:24:35.193+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2025-09-04T00:24:35.260+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-09-04T00:24:35.264+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-09-04T00:34:17.339+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-04T00:34:17.417+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: banvic_pipeline.extract_postgres scheduled__2025-09-02T07:35:00+00:00 [queued]>
+[2025-09-04T00:34:17.428+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: banvic_pipeline.extract_postgres scheduled__2025-09-02T07:35:00+00:00 [queued]>
+[2025-09-04T00:34:17.429+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-09-04T00:34:17.444+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): extract_postgres> on 2025-09-02 07:35:00+00:00
+[2025-09-04T00:34:17.454+0000] {standard_task_runner.py:64} INFO - Started process 185 to run task
+[2025-09-04T00:34:17.462+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'banvic_pipeline', 'extract_postgres', 'scheduled__2025-09-02T07:35:00+00:00', '--job-id', '46', '--raw', '--subdir', 'DAGS_FOLDER/banvic_pipeline.py', '--cfg-path', '/tmp/tmpnfg498hj']
+[2025-09-04T00:34:17.466+0000] {standard_task_runner.py:91} INFO - Job 46: Subtask extract_postgres
+[2025-09-04T00:34:17.829+0000] {task_command.py:426} INFO - Running <TaskInstance: banvic_pipeline.extract_postgres scheduled__2025-09-02T07:35:00+00:00 [running]> on host 8ecc11fed1c2
+[2025-09-04T00:34:18.166+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='lucas' AIRFLOW_CTX_DAG_ID='banvic_pipeline' AIRFLOW_CTX_TASK_ID='extract_postgres' AIRFLOW_CTX_EXECUTION_DATE='2025-09-02T07:35:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-02T07:35:00+00:00'
+[2025-09-04T00:34:18.169+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-04T00:34:18.266+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-09-04T00:34:18.268+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'cd /opt/airflow/project && python scripts/extracao_postgres/extracao_completa.py']
+[2025-09-04T00:34:18.304+0000] {subprocess.py:86} INFO - Output:
+[2025-09-04T00:34:21.216+0000] {subprocess.py:93} INFO - /opt/airflow/project/scripts/extracao_postgres/extracao_completa.py:39: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2025-09-04T00:34:21.217+0000] {subprocess.py:93} INFO -   df = pd.read_sql(f'select * from "{tabela}";', conn)
+[2025-09-04T00:34:21.465+0000] {subprocess.py:93} INFO - /opt/airflow/project/scripts/extracao_postgres/extracao_completa.py:39: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2025-09-04T00:34:21.466+0000] {subprocess.py:93} INFO -   df = pd.read_sql(f'select * from "{tabela}";', conn)
+[2025-09-04T00:34:21.554+0000] {subprocess.py:93} INFO - /opt/airflow/project/scripts/extracao_postgres/extracao_completa.py:39: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2025-09-04T00:34:21.555+0000] {subprocess.py:93} INFO -   df = pd.read_sql(f'select * from "{tabela}";', conn)
+[2025-09-04T00:34:21.646+0000] {subprocess.py:93} INFO - Tabelas encontradas: ['agencias', 'clientes', 'colaborador_agencia', 'colaboradores', 'contas', 'propostas_credito']
+[2025-09-04T00:34:21.648+0000] {subprocess.py:93} INFO - 
+[2025-09-04T00:34:21.649+0000] {subprocess.py:93} INFO - Extraindo: agencias
+[2025-09-04T00:34:21.650+0000] {subprocess.py:93} INFO - Linhas DB: 10 | Linhas CSV: 10 -> OK
+[2025-09-04T00:34:21.651+0000] {subprocess.py:93} INFO - Arquivo salvo: 2025-09-04/postgres/agencias.csv
+[2025-09-04T00:34:21.652+0000] {subprocess.py:93} INFO - 
+[2025-09-04T00:34:21.652+0000] {subprocess.py:93} INFO - Extraindo: clientes
+[2025-09-04T00:34:21.653+0000] {subprocess.py:93} INFO - Linhas DB: 998 | Linhas CSV: 998 -> OK
+[2025-09-04T00:34:21.654+0000] {subprocess.py:93} INFO - Arquivo salvo: 2025-09-04/postgres/clientes.csv
+[2025-09-04T00:34:21.654+0000] {subprocess.py:93} INFO - 
+[2025-09-04T00:34:21.655+0000] {subprocess.py:93} INFO - Extraindo: colaborador_agencia
+[2025-09-04T00:34:21.656+0000] {subprocess.py:93} INFO - Linhas DB: 100 | Linhas CSV: 100 -> OK
+[2025-09-04T00:34:21.656+0000] {subprocess.py:93} INFO - Arquivo salvo: 2025-09-04/postgres/colaborador_agencia.csv
+[2025-09-04T00:34:21.657+0000] {subprocess.py:93} INFO - 
+[2025-09-04T00:34:21.658+0000] {subprocess.py:93} INFO - Extraindo: colaboradores
+[2025-09-04T00:34:21.659+0000] {subprocess.py:93} INFO - Linhas DB: 100 | Linhas CSV: 100 -> OK
+[2025-09-04T00:34:21.659+0000] {subprocess.py:93} INFO - Arquivo salvo: 2025-09-04/postgres/colaboradores.csv
+[2025-09-04T00:34:21.660+0000] {subprocess.py:93} INFO - 
+[2025-09-04T00:34:21.661+0000] {subprocess.py:93} INFO - Extraindo: contas
+[2025-09-04T00:34:21.662+0000] {subprocess.py:93} INFO - Linhas DB: 998 | Linhas CSV: 998 -> OK
+[2025-09-04T00:34:21.662+0000] {subprocess.py:93} INFO - Arquivo salvo: 2025-09-04/postgres/contas.csv
+[2025-09-04T00:34:21.663+0000] {subprocess.py:93} INFO - 
+[2025-09-04T00:34:21.664+0000] {subprocess.py:93} INFO - Extraindo: propostas_credito
+[2025-09-04T00:34:21.664+0000] {subprocess.py:93} INFO - Linhas DB: 1995 | Linhas CSV: 1995 -> OK
+[2025-09-04T00:34:21.665+0000] {subprocess.py:93} INFO - Arquivo salvo: 2025-09-04/postgres/propostas_credito.csv
+[2025-09-04T00:34:21.665+0000] {subprocess.py:93} INFO - 
+[2025-09-04T00:34:21.666+0000] {subprocess.py:93} INFO - Finalizado! Todos os CSVs foram gerados na pasta: 2025-09-04/postgres
+[2025-09-04T00:34:21.786+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-09-04T00:34:21.788+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-04T00:34:21.893+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=banvic_pipeline, task_id=extract_postgres, run_id=scheduled__2025-09-02T07:35:00+00:00, execution_date=20250902T073500, start_date=20250904T003417, end_date=20250904T003421
+[2025-09-04T00:34:21.943+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2025-09-04T00:34:21.990+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-09-04T00:34:21.994+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

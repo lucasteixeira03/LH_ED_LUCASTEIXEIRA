@@ -3,7 +3,7 @@ import sys
 import psycopg2
 from datetime import datetime
 
-DW_HOST = "localhost"
+DW_HOST = "host.docker.internal"
 DW_PORT = "56432"
 DW_NAME = "banvic_warehouse"
 DW_USER = "lucas_dw"
@@ -38,8 +38,6 @@ def truncate(cur, tabela):
     cur.execute(f'TRUNCATE TABLE "{tabela}";')
 
 def copy_csv(cur, tabela, caminho_csv):
-    # COPY FROM STDIN WITH CSV HEADER lê pela ORDEM DAS COLUNAS do CSV.
-    # Como os CSVs foram gerados com SELECT * e o DDL segue a mesma ordem, funciona direto.
     with open(caminho_csv, "r", encoding="utf-8") as f:
         cur.copy_expert(
             sql=f'COPY "{tabela}" FROM STDIN WITH CSV HEADER',
@@ -51,7 +49,6 @@ def count_rows(cur, tabela):
     return cur.fetchone()[0]
 
 def main():
-    # Checagens básicas
     if not os.path.isdir(BASE_DIR):
         print(f" ERROR: PASTA DO DIA NÃO ENCONTRADA!: {BASE_DIR}")
         sys.exit(1)
