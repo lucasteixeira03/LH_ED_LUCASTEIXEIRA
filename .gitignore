@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+.venv/
+venv/
+
+# Airflow
+airflow/logs/
+airflow_dbdata/
+*.pid
+
+# Docker 
+dbdata/
+dwdata/
+
+# Arquivos temporários
+*.tmp
+*.temp
+*.log
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Credenciais
+.env
+.env.local
